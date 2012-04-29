@@ -276,7 +276,7 @@ AVInputFormat *av_find_input_format(const char *short_name)
 
 int ffio_limit(AVIOContext *s, int size)
 {
-    if(s->maxsize>=0){
+    if(s->maxsize>=0 && s->seekable){
         int64_t remaining= s->maxsize - avio_tell(s);
         if(remaining < size){
             int64_t newsize= avio_size(s);
